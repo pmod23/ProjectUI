@@ -3,10 +3,10 @@ const apiKey = "eBc6ImzS5eQd9TfihFKfB3HchqTOkMN5rfMaSXnI";
 
 // Define Base URL
 const baseURL =
-  "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos";
+  "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos";
 
 // Combine Base URL and api Key
-const url = `${baseURL}?sol=1000&page=1&api_key=${apiKey}`;
+const url = `${baseURL}?page=1&sol=1000&api_key=${apiKey}`;
 
 let photos = [];
 
@@ -20,18 +20,20 @@ const showModal = (data) => {
   document.getElementById("launch-date").textContent = data.rover.launch_date;
   document.getElementById("landing-date").textContent = data.rover.landing_date;
   document.getElementById("active-status").textContent = data.rover.status;
-
+document.getElementById("modal-image").src = data.img_src;
   console.log(data);
 
   modal.classList.remove("hidden");
 };
 
-// This is what we want after the feetch request is completed
+// This is what we want after the fetch request is completed
 const doAfterFetch = (response) => {
+
   return response.json();
 };
 
 const doAfterJSONConversion = (response) => {
+  console.log(response);
   photos = response.photos;
 
   const grid = document.querySelector(".grid");
